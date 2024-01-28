@@ -12,7 +12,7 @@
         @foreach($posts as $post)
             <tr wire:key="{{ $post->id }}">
                 <td>{{ $post->title }}</td>
-                <td>{{ str($post->body)->limit(50) }}</td>
+                <td>{{ str($post->content)->limit(50) }}</td>
                 <td>
                     <button
                             type="button"

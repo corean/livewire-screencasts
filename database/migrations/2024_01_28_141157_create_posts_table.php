@@ -13,9 +13,9 @@ return new class extends Migration {
     {
         Schema::create('posts', static function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
+            // $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->string('title');
-            $table->longText('body');
+            $table->longText('content');
             $table->timestamps();
         });
     }
