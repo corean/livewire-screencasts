@@ -16,6 +16,7 @@ return new class extends Migration {
             // $table->foreignIdFor(User::class)->constrained()->restrictOnDelete();
             $table->string('title');
             $table->longText('content');
+            $table->boolean('is_archived')->default(false);
             $table->timestamps();
         });
     }

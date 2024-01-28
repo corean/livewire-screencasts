@@ -12,5 +12,17 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
+        'is_archived',
     ];
+
+    protected $casts = [
+        'is_archived' => 'boolean',
+    ];
+
+    public function archive(): bool
+    {
+        return $this->update([
+            'is_archived' => true,
+        ]);
+    }
 }
