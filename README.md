@@ -1,66 +1,103 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# livewire.laravel.com
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[Installation Screencast | Laravel](https://livewire.laravel.com/screencasts)
 
-## About Laravel
+동영상 강의를 보고 정리한 내용입니다.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Properties
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```html
+<button wire:click="increment">+</button>
+<button wire:mouseenter="increment">+</button> # 마우스 오버
+<button wire.window:click="increment">+</button> # window 객체
+<button wire:click.throttle.1000ms="increment">+</button> # 여러번 눌러도 1초에 1번만 
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<input type="text" wire:model.live.debounce.500ms="todo"> # 500ms 있으면 한꺼번에 인식
+<input type="text" wire:model.live.blur="todo"> # blur가 꺼지면 동작. 유효성 검사때 사용
+```
 
-## Learning Laravel
+### **Lifecycle Hooks**
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```php
+public function updated($property, $value): void
+{
+  $this->$property = strtoupper($value);
+}
+public function updatedTodo($value): void # magic method
+{
+  $this->todo = strtoupper($value);
+	$this->validate()
+}
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Page Components
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+```php
+<a href="/counter" wire:navigate @class([ 'current' => request()->is('counter') ])>Counter</a>
+```
 
-## Laravel Sponsors
+### Basic Tables
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Basic Form
 
-### Premium Partners
+```php
+#[Rule('required', message: 'Yo, add a title')]
+public $title = '';
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Alpine
 
-## Contributing
+```html
+Current Title (alpinjs) : <span x-html="$wire.title.toUpperCase()"></span>
+<small>Words: <span x-text="$wire.content.split(' ').length - 1"></span></small>
+<button type="button" x-on:click="$wire.save()">Save</button>
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Testing
 
-## Code of Conduct
+```bash
+php artisan make:livewire CreatePost --pest
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```php
+Livewire::test(CreatePost::class)
+	->set('title', 'Some title')
+	->set('content', 'Some content')
+	->call('save');
 
-## Security Vulnerabilities
+$post = Post::whereTitle('Some title')->first();
+$this->assetEquals('Some title', $post->title);
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Livewire::test(CreatePost::class)
+	->set('title', '')
+	->call('save')
+	->assetHasErrors(['title' => 'required']);
+```
 
-## License
+### Nesting
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+삭제 같은 목록을 변경하는 경우는 해당 요소보다 상위요소에서 처리해야 목록 업데이트가 일어난다.
+
+key의 경우 : 일반적인 경우는 `wire:key`를 사용하면 되지만, 중첩요소일때는 `:wire:key`를 사용해야 한다.
+
+```php
+<livewire:post-row :key="$post->id" :$post />
+
+<tr @class(['archived' => $post->is_archived])>
+<button wire:click="$parent.delete({{ $post->id }})">Delete</button>
+</tr>
+```
+
+Navigate
+
+```php
+<a wire:naviagte.hover @class(['current' => request()->is('posts')])>Posts</a>
+# .hover is mouse over preloading
+
+# 페이지 유지
+@persist('player')
+    <audio src="{{ $episode->file }}" controls></audio>
+@endpersist
+
+$this->redirect('/posts', navigate: true);
+```
