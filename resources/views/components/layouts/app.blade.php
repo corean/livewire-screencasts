@@ -13,7 +13,8 @@
     <a href="/" wire:navigate
             @class([ 'current' => request()->is('/') ])
     >Todos</a>
-    <a href="/counter" wire:navigate@class([ 'current' => request()->is('counter') ])>Counter</a>
+    <a href="/counter" wire:navigate @class([ 'current' => request()->is('counter') ])>Counter</a>
+    <a href="/posts" wire:navigate @class([ 'current' => request()->is('posts') ])>Counter</a>
 </nav>
 
 {{ $slot }}
