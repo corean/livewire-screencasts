@@ -11,6 +11,8 @@ class EditProfile extends Component
     public $username = '';
     public $bio = '';
 
+    public $showSuccessIndicator = false;
+
     public function mount()
     {
         $this->user = auth()->user();
@@ -25,6 +27,10 @@ class EditProfile extends Component
         $this->user->bio = $this->bio;
 
         $this->user->save();
+
+        sleep(1);
+
+        $this->showSuccessIndicator = true;
     }
 
     public function render()
