@@ -88,7 +88,7 @@ key의 경우 : 일반적인 경우는 `wire:key`를 사용하면 되지만, 중
 </tr>
 ```
 
-Navigate
+### Navigate
 
 ```php
 <a wire:naviagte.hover @class(['current' => request()->is('posts')])>Posts</a>
