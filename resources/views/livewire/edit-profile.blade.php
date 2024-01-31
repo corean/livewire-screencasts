@@ -6,15 +6,15 @@
             <div class="flex flex-col gap-2">
                 <h3 class="font-medium text-slate-700 text-base">Username</h3>
 
-                <input wire:model.live="username"
+                <input wire:model.live="form.username"
                        @class([
                           'px-3 py-2  rounded-lg',
-                          'border border-slate-300' => $errors->missing('username'),
-                          'border-2 border-red-400' => $errors->has('username'),
+                          'border border-slate-300' => $errors->missing('form.username'),
+                          'border-2 border-red-400' => $errors->has('form.username'),
                       ])
                        placeholder="Username..."
                 >
-                @error('username')
+                @error('form.username')
                 <span class="text-red-400 text-sm">{{ $message }}</span>
                 @enderror
             </div>
@@ -22,7 +22,7 @@
             <div class="flex flex-col gap-2">
                 <h3 class="font-medium text-slate-700 text-base">Bio</h3>
 
-                <textarea wire:model="bio" rows="4" class="px-3 py-2 border border-slate-300 rounded-lg"
+                <textarea wire:model="form.bio" rows="4" class="px-3 py-2 border border-slate-300 rounded-lg"
                           placeholder="A little bit about yourself..."></textarea>
             </div>
 
