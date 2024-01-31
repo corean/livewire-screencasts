@@ -1,6 +1,5 @@
 <?php
 
-use App\Livewire\EditProfile;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +18,8 @@ Route::get('/counter', \App\Livewire\Counter::class);
 Route::get('/posts', \App\Livewire\Posts::class);
 Route::get('/create-post', \App\Livewire\CreatePost::class);
 
-Route::get('profile', \App\Livewire\EditProfile::class);
+Route::group([
+    'middleware' => 'auth',
+], static function () {
+    Route::get('profile', \App\Livewire\EditProfile::class);
+});
