@@ -28,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'bio',
+        'receive_emails',
     ];
 
     /**
@@ -49,6 +50,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'receive_emails'    => 'boolean',
     ];
 
     /**

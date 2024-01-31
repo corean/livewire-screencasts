@@ -30,6 +30,27 @@
                           placeholder="A little bit about yourself..."></textarea>
             </label>
 
+            <label class="flex flex-col gap-2">
+                <h3 class="font-medium text-slate-700 text-base">Receive emails</h3>
+
+                <fieldset>
+                    <legend class="sr-only">Receive emails</legend>
+                    <div class="flex gap-6">
+                        <label class="flex gap-2 items-center">
+                            <input type="radio" name="receive_emails" value="true"
+                                   wire:model.boolean="form.receive_emails"
+                            > Yes
+                        </label>
+                        <label class="flex gap-2 items-center">
+                            <input type="radio" name="receive_emails" value="false"
+                                   wire:model.boolean="form. receive_emails"
+                            > No
+                        </label>
+                    </div>
+                </fieldset>
+            </label>
+
+
             <div class="flex">
                 <button type="submit"
                         class="relative w-full bg-blue-500 py-3 px-8 rounded-lg text-white font-medium disabled:cursor-not-allowed disabled:opacity-75 "
