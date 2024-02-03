@@ -25,3 +25,4 @@ Route::group([
 });
 
 Route::get('signup', \App\Livewire\Signup::class)->name('signup');
+Route::get('blog-posts', \App\Livewire\ShowPosts::class)->name('blog-posts');
