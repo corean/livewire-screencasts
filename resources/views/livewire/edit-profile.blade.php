@@ -50,10 +50,10 @@
                             aria-describedby="{{ $message }}"
                         @enderror
                 >
-                    <option value="">Choose your contry</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="UK">United Kingdom</option>
+                    <option value="">Choose your country</option>
+                    @foreach(\App\Enums\Country::cases() as $country)
+                        <option value="{{ $country->value }}">{{ $country->label() }}</option>
+                    @endforeach
                 </select>
                 @error('form.country')
                 <span class="text-red-400 text-sm" aria-live="assertive">{{ $message }}</span>
