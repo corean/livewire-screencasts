@@ -17,6 +17,7 @@ class EditProfileForm extends Form
     public $receive_emails = false;
     public $receive_update = false;
     public $receive_offers = false;
+    public $country = '';
 
     public function rules()
     {
@@ -24,6 +25,9 @@ class EditProfileForm extends Form
             'username' => [
                 'required',
                 Rule::unique('users', 'username')->ignore($this->user->id),
+            ],
+            'country'  => [
+                'required',
             ],
         ];
     }
@@ -37,6 +41,7 @@ class EditProfileForm extends Form
         $this->receive_emails = $this->user->receive_emails;
         $this->receive_update = $this->user->receive_update;
         $this->receive_offers = $this->user->receive_offers;
+        $this->country = $this->user->country;
     }
 
     public function update()
@@ -48,6 +53,7 @@ class EditProfileForm extends Form
         $this->user->receive_emails = $this->receive_emails;
         $this->user->receive_update = $this->receive_update;
         $this->user->receive_offers = $this->receive_offers;
+        $this->user->country = $this->country;
 
         $this->user->save();
     }

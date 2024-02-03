@@ -31,6 +31,7 @@ class User extends Authenticatable
         'receive_emails',
         'receive_update',
         'receive_offers',
+        'country',
     ];
 
     /**

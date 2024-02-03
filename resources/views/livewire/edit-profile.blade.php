@@ -4,7 +4,10 @@
 
         <form wire:submit="save" class="min-w-[30rem] flex flex-col gap-6 bg-white rounded-lg shadow p-6">
             <label class="flex flex-col gap-2">
-                <h3 class="font-medium text-slate-700 text-base">Username</h3>
+                <h3 class="font-medium text-slate-700 text-base">
+                    Username
+                    <span class="text-red-500" aria-hidden="true">*</span>
+                </h3>
 
                 <input wire:model.blur="form.username"
                        @class([
@@ -15,8 +18,8 @@
                        placeholder="Username..."
                        @error('form.username')
                        aria-invalid="true"
-                       aria-describedby="{{ $meessage }}"
-                        @enderror
+                       aria-describedby="{{ $message }}"
+                       @enderror
                 >
                 @error('form.username')
                 <span class="text-red-400 text-sm" aria-live="assertive">{{ $message }}</span>
@@ -28,6 +31,33 @@
 
                 <textarea wire:model="form.bio" rows="4" class="px-3 py-2 border border-slate-300 rounded-lg"
                           placeholder="A little bit about yourself..."></textarea>
+            </label>
+
+            <label class="flex flex-col gap-2">
+                <h3 class="font-medium text-slate-700 text-base">
+                    Country
+                    <span class="text-red-500" aria-hidden="true">*</span>
+                </h3>
+
+                <select wire:model="form.country"
+                        @class([
+                            'px-3 py-2 rounded-lg',
+                            'border border-slate-300' => $errors->missing('form.country'),
+                            'border-2 border-red-400' => $errors->has('form.country'),
+                        ])
+                        @error('form.country')
+                            aria-invalid="true"
+                            aria-describedby="{{ $message }}"
+                        @enderror
+                >
+                    <option value="">Choose your contry</option>
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="UK">United Kingdom</option>
+                </select>
+                @error('form.country')
+                <span class="text-red-400 text-sm" aria-live="assertive">{{ $message }}</span>
+                @enderror
             </label>
 
             <fieldset class="flex flex-col gap-2">
