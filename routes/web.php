@@ -23,3 +23,5 @@ Route::group([
 ], static function () {
     Route::get('profile', \App\Livewire\EditProfile::class);
 });
+
+Route::get('signup', \App\Livewire\Signup::class)->name('signup');
