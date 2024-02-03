@@ -37,7 +37,7 @@
             <!-- Close Button -->
             <div class="absolute top-0 right-0 pt-4 pr-4">
                 <button type="button" x-on:click="$dialog.close()"
-                        class="bg-gray-50 rounded-lg p-2 text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
+                        class="bg-gray-50 hover:bg-gray-200 rounded-lg p-2 text-gray-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2">
                     <span class="sr-only">Close modal</span>
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
                          fill="currentColor">

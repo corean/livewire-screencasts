@@ -2,17 +2,23 @@
 
 namespace App\Livewire;
 
+use App\Livewire\Forms\CreatePostForm;
 use App\Models\Post;
 use Livewire\Component;
 
 class ShowPosts extends Component
 {
-    public $posts;
-    public $showModal = true;
+    public CreatePostForm $form;
 
-    public function mount()
+    public $showAddPostDialog = false;
+
+    public function addPost()
     {
-        $this->posts = \App\Models\Post::all();
+        $this->form->save();
+
+        $this->reset('showAddPostDialog');
+
+        sleep(1);
     }
 
     public function delete(Post $post)
@@ -24,6 +30,10 @@ class ShowPosts extends Component
 
     public function render()
     {
-        return view('livewire.show-posts');
+        $posts = Post::orderBy('id', 'desc')->limit(10)->get();
+
+        return view('livewire.show-posts', [
+            'posts' => $posts,
+        ]);
     }
 }
