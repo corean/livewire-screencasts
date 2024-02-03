@@ -15,6 +15,8 @@ class EditProfileForm extends Form
     public $username = '';
     public $bio = '';
     public $receive_emails = false;
+    public $receive_update = false;
+    public $receive_offers = false;
 
     public function rules()
     {
@@ -33,6 +35,8 @@ class EditProfileForm extends Form
         $this->username = $this->user->username;
         $this->bio = $this->user->bio;
         $this->receive_emails = $this->user->receive_emails;
+        $this->receive_update = $this->user->receive_update;
+        $this->receive_offers = $this->user->receive_offers;
     }
 
     public function update()
@@ -42,6 +46,8 @@ class EditProfileForm extends Form
         $this->user->username = $this->username;
         $this->user->bio = $this->bio;
         $this->user->receive_emails = $this->receive_emails;
+        $this->user->receive_update = $this->receive_update;
+        $this->user->receive_offers = $this->receive_offers;
 
         $this->user->save();
     }

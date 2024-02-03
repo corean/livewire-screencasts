@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('bio')->nullable();
             $table->boolean('receive_emails')->default(false);
+            $table->boolean('receive_update')->default(false);
+            $table->boolean('receive_offers')->default(false);
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

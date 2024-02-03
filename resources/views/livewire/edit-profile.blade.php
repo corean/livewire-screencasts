@@ -14,9 +14,9 @@
                       ])
                        placeholder="Username..."
                        @error('form.username')
-                           aria-invalid="true"
-                           aria-describedby="{{ $meessage }}"
-                       @enderror
+                       aria-invalid="true"
+                       aria-describedby="{{ $meessage }}"
+                        @enderror
                 >
                 @error('form.username')
                 <span class="text-red-400 text-sm" aria-live="assertive">{{ $message }}</span>
@@ -30,25 +30,41 @@
                           placeholder="A little bit about yourself..."></textarea>
             </label>
 
-            <label class="flex flex-col gap-2">
-                <h3 class="font-medium text-slate-700 text-base">Receive emails</h3>
+            <fieldset class="flex flex-col gap-2">
+                <div>
+                    <legend class="font-medium text-slate-700 text-base">Receive emails</legend>
+                </div>
+                <div class="flex gap-6">
+                    <label class="flex gap-2 items-center">
+                        <input type="radio" name="receive_emails" value="true"
+                               wire:model.boolean="form.receive_emails"
+                        > Yes
+                    </label>
+                    <label class="flex gap-2 items-center">
+                        <input type="radio" name="receive_emails" value="false"
+                               wire:model.boolean="form.receive_emails"
+                        > No
+                    </label>
+                </div>
+            </fieldset>
 
-                <fieldset>
-                    <legend class="sr-only">Receive emails</legend>
-                    <div class="flex gap-6">
-                        <label class="flex gap-2 items-center">
-                            <input type="radio" name="receive_emails" value="true"
-                                   wire:model.boolean="form.receive_emails"
-                            > Yes
-                        </label>
-                        <label class="flex gap-2 items-center">
-                            <input type="radio" name="receive_emails" value="false"
-                                   wire:model.boolean="form. receive_emails"
-                            > No
-                        </label>
-                    </div>
-                </fieldset>
-            </label>
+            <fieldset x-show="$wire.form.receive_emails" x-transition.opacity class="flex flex-col gap-2">
+                <div>
+                    <legend class="font-medium text-slate-700 text-base">Email type</legend>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label class="flex gap-2 items-center">
+                        <input type="checkbox" name="receive_update" class="rounded"
+                               wire:model="form.receive_update"
+                        > General updates
+                    </label>
+                    <label class="flex gap-2 items-center">
+                        <input type="checkbox" name="receive_offers" class="rounded"
+                               wire:model="form.receive_offers"
+                        > Marketing offers
+                    </label>
+                </div>
+            </fieldset>
 
 
             <div class="flex">
