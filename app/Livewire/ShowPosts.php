@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Post;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class ShowPosts extends Component
@@ -13,6 +14,14 @@ class ShowPosts extends Component
 
         sleep(1);
     }
+
+    /* 하위 component에서 dispatch() 받기
+    #[on('post-added')]
+    public function added()
+    {
+        dd('post added');
+    }
+    */
 
     public function render()
     {

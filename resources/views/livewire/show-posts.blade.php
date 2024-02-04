@@ -7,7 +7,7 @@
                 <tr class="text-left text-slate-800 font-semibold">
                     <th class="pl-6 py-4">Title</th>
                     <th class="pl-4 py-4">Content</th>
-                    <th class="pl-4 py-4 pr-4">
+                    <th class="pl-4 py-4 pr-4 text-right">
                         <livewire:create-post-dialog @post-added="$refresh" />
                     </th>
                 </tr>
