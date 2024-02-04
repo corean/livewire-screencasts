@@ -9,8 +9,5 @@ class PostRow extends Component
 {
     public $post;
 
-    public function archive()
-    {
-        $this->post->archive();
-    }
+
 }
