@@ -2,12 +2,12 @@
 
 namespace App\Livewire;
 
-use App\Livewire\Forms\CreatePostForm;
+use App\Livewire\Forms\PostForm;
 use Livewire\Component;
 
 class CreatePostDialog extends Component
 {
-    public CreatePostForm $form;
+    public PostForm $form;
 
     public $show = false;
 

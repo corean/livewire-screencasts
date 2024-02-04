@@ -15,6 +15,7 @@ class ShowPosts extends Component
         sleep(1);
     }
 
+
     /* 하위 component에서 dispatch() 받기
     #[on('post-added')]
     public function added()
