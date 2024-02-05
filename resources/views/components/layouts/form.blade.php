@@ -13,7 +13,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/ui@3.13.5-beta.0/dist/cdn.min.js"></script>
 </head>
 <body>
-<main class="flex justify-center items-start py-16 bg-slate-200 min-h-screen text-slate-800">
+<main class="flex justify-center items-start pt-24 bg-slate-200 min-h-screen text-slate-800">
     {{ $slot }}
 </main>
 </body>

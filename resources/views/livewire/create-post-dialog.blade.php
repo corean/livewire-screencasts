@@ -1,11 +1,8 @@
 <div>
     <x-dialog wire:model="show">
-        <x-button>
-            <button type="button"
-                    class="font-medium text-sm bg-blue-500 text-white px-4 py-2 rounded-xl hover:bg-blue-600"
-            >New Post
-            </button>
-        </x-button>
+        <x-dialog.open>
+            <button type="button" class="text-white bg-blue-500 rounded-xl px-4 py-2 text-sm">New Post</button>
+        </x-dialog.open>
         <x-dialog.panel>
             <form wire:submit="addPost"
                   class="flex flex-col gap-4"
